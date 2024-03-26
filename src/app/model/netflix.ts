@@ -16,9 +16,16 @@ export interface Netflix {
     rating: string;
     isBookmarked: boolean;
     isTrending: boolean;
+    id: string;
 }
 
-export interface Users {
+export interface Login {
     email: string;
     password: string;
+}
+
+export interface Signup {
+    email: string;
+    password: string;
+    repeatPassword: string;
 }
