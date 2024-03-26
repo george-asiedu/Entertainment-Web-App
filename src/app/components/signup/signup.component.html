@@ -1,26 +1,44 @@
 <div class="max-w-full h-screen overflow-hidden bg-midnight flex flex-col items-center justify-center">
     <div class="w-[90%] md:w-[70%] lg:w-[400px] h-auto mx-auto flex flex-col gap-[4rem]">
         <img src="../../assets/logo.svg" class="w-[3rem] mx-auto" alt="logo-image">
-        <form class="bg-darkBlue w-full h-[380px] rounded-[16px] py-[1.5rem] px-[2rem]">
+        <form 
+            (ngSubmit)="signUp()"
+            class="bg-darkBlue w-full h-[380px] rounded-[16px] py-[1.5rem] px-[2rem]"
+        >
             <h1 class="text-white text-xl font-light mb-3">Signup</h1>
             <div class="mb-5">
                 <input 
-                type="email"
-                placeholder="Email address"
-                class="text-white w-full p-3 mb-2 bg-inherit border-b border-b-slate focus:outline-none focus:caret-plum focus:border-b-white hover:border-b-white placeholder:text-xs placeholder:tracking-wider"
+                    type="email"
+                    name="email"
+                    [(ngModel)]="user.email"
+                    placeholder="Email address"
+                    class="text-white w-full p-3 mb-2 bg-inherit border-b border-b-slate focus:outline-none focus:caret-plum focus:border-b-white hover:border-b-white placeholder:text-xs placeholder:tracking-wider"
+                    required
                 >
                 <input 
                     type="password"
+                    name="password"
+                    [(ngModel)]="user.password"
                     placeholder="Password"
                     class="text-white w-full p-3 mb-2 bg-inherit border-b border-b-slate focus:outline-none focus:caret-plum focus:border-b-white hover:border-b-white placeholder:text-xs placeholder:tracking-wider"
+                    required
                 >
                 <input 
                     type="password"
+                    name="email"
+                    [(ngModel)]="user.repeatPassword"
+                    (input)="checkPassword()"
                     placeholder="Repeat password"
                     class="text-white w-full p-3 bg-inherit border-b border-b-slate focus:outline-none focus:caret-plum focus:border-b-white hover:border-b-white placeholder:text-xs placeholder:tracking-wider"
+                    required
                 >
+                @if (!passwordMatch) {
+                    <p class="text-plum text-xs">Password do not match</p>
+                }
             </div>
             <button 
+                [disabled]="!passwordMatch"
+                type="submit"
                 class="bg-plum w-full mb-5 rounded-[5px] h-[40px] lg:h-[45px] text-white font-light text-xs tracking-wide hover:bg-white hover:text-midnight hover:font-medium"
             >
                 Create an account
