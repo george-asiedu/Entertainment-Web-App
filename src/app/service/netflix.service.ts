@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
+import { Login, Netflix } from '../model/netflix';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +12,16 @@ export class NetflixService {
 
   constructor(private http: HttpClient) { }
 
-  getUsers(): Observable<any> {
-    return this.http.get<any>(this.usersURL).pipe(catchError(this.handleError))
+  postUsers(user: any): Observable<any> {
+    return this.http.post<any>(this.usersURL, user)
   }
 
-  getMovies(): Observable<any> {
-    return this.http.get<any>(this.appURL).pipe(catchError(this.handleError))
+  userLogin(credentials: Login): Observable<any> {
+    return this.http.post<any>(this.usersURL, credentials)
+  }
+
+  getMovies(): Observable<Netflix[]> {
+    return this.http.get<Netflix[]>(this.appURL).pipe(catchError(this.handleError))
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
