@@ -10,7 +10,6 @@ import { NetflixService } from '../../service/netflix.service';
   styleUrl: './trending.component.scss'
 })
 export class TrendingComponent implements OnInit {
-  // @Input() trendingList!: Netflix;
   trending: Netflix[] = []
 
   constructor(private netflixService: NetflixService) {}
