@@ -16,18 +16,27 @@
             </div>
         </div>
 
-        <div class="px-[1rem] md:px-[1.5rem] mt-10">
+        <div class="px-[1rem] md:px-[1.5rem] mt-[10px] lg:mt-[20px]">
+            @if (search === '') {
+                <h1 class="text-white text-lg font-light tracking-wide mb-[10px] lg:mb-[14px]">Trending</h1>
+                <app-trending></app-trending>
+            } @else {
+                <h1 class="hidden">Trending</h1>
+            }        
+        </div>
+
+        <div class="px-[1rem] md:px-[1.5rem] mt-[20px]">
             @if (search === '') {
                 <h1 class="text-white text-lg font-light tracking-wide mb-[14px]">Recommended for you</h1>
             } @else {
                 <h1 class="text-white text-lg font-light tracking-wide mb-[14px]">Found {{ searchResultCount}} results for `{{ search }}`</h1>
             }
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[1rem]">
-                <div *ngFor="let list of movieItems" class="flex flex-col gap-[2px] mb-[15px]">
+                <div *ngFor="let list of movieItems" class="flex flex-col gap-[2px] mb-[15px] cursor-pointer">
                     <div class="relative">
                         <img [src]="list.thumbnail.regular.large" class="rounded-[8px]" alt="list.title">
-                        <div class="absolute top-[15%] right-[8%] bg-[#645d5d] w-[30px] h-[30px] rounded-full flex items-center justify-center">
-                            <img src="../../../assets/icon-bookmark-empty.svg" alt="icon-bookmark-empty">
+                        <div class="absolute top-[8%] right-[8%] lg:right-[5%] bg-midnight bg-opacity-50 w-[20px] h-[20px] md:w-[25px] md:h-[25px] rounded-full flex items-center justify-center">
+                            <img src="../../../assets/icon-bookmark-empty.svg" class="w-[40%]" alt="icon-bookmark-empty">
                         </div>
                     </div>
                     <div class="flex items-center gap-[8px] text-white text-opacity-60 text-xs">
