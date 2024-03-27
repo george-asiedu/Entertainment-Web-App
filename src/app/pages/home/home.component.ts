@@ -4,17 +4,19 @@ import { Netflix } from '../../model/netflix';
 import { NetflixService } from '../../service/netflix.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { TrendingComponent } from '../../components/trending/trending.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [SidebarComponent, FormsModule, CommonModule],
+  imports: [SidebarComponent, FormsModule, CommonModule, TrendingComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
   movieItems: Netflix[] = []
   search: string = ''
+  trendingList: Netflix[] = []
   searchResultCount: number = 0
 
   constructor(private netflixService: NetflixService) {}
@@ -23,6 +25,7 @@ export class HomeComponent implements OnInit {
       this.netflixService.getMovies().subscribe(
         (response) => {
           this.movieItems = response
+          this.trendingList = response.filter((trends => trends.isTrending))
         }
       )
   }
