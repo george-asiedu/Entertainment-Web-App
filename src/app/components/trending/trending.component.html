@@ -1,0 +1,27 @@
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[1rem]">
+    @for (trends of trending; track trends.id) {
+        <div class="w-full cursor-pointer">
+           <div class="relative">
+                <img [src]="trends.thumbnail.trending.large" class="rounded-[8px]" alt="trends.title">
+                <div class="absolute top-[8%] right-[8%] lg:right-[5%] bg-midnight bg-opacity-50 w-[20px] h-[20px] md:w-[25px] md:h-[25px] rounded-full flex items-center justify-center">
+                    <img src="../../../assets/icon-bookmark-empty.svg" class="w-[40%]" alt="icon-bookmark-empty">
+                </div>
+                <div class="absolute bottom-[26%] md:bottom-[25%] left-[4%] flex items-center gap-[8px] text-white text-opacity-60 text-[10px]">
+                    <p>{{ trends.year }}</p>
+                    <div class="flex items-center gap-1">
+                        <p class="-mt-[13px] text-lg">.</p>
+                        @if (trends.category === 'Movie') {
+                            <img src="../../../assets/icon-category-movie.svg" alt="icon-category-movie">
+                        } @else {
+                            <img src="../../../assets/icon-category-tv.svg" alt="icon-category-tv">
+                        }
+                        <p>{{ trends.category }}</p>
+                    </div>
+                    <p class="-mt-[13px] text-lg">.</p>
+                    <p>{{ trends.rating }}</p>
+                </div>
+                <h4 class="absolute bottom-[12%] md:bottom-[10%] left-[4%] text-white text-xs leading-none">{{ trends.title }}</h4>
+           </div>
+        </div>
+    }
+</div>
