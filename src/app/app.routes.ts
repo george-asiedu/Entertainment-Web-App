@@ -4,6 +4,7 @@ import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { MoviesComponent } from './pages/movies/movies.component';
 import { SeriesComponent } from './pages/series/series.component';
+import { BookmarkedComponent } from './pages/bookmarked/bookmarked.component';
 
 
 export const routes: Routes = [
@@ -31,5 +32,10 @@ export const routes: Routes = [
         path: 'series',
         title: 'Frontend Mentor | Entertainment Web App - TV Series',
         component: SeriesComponent
+    },
+    {
+        path: 'bookmark',
+        title: 'Frontend Mentor | Entertainment Web App - Bookmark',
+        component: BookmarkedComponent
     }
 ];
