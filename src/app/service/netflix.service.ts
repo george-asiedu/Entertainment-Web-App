@@ -8,7 +8,7 @@ import { Login, Netflix } from '../model/netflix';
 })
 export class NetflixService {
   private usersURL = 'http://localhost:3000/users'
-  private appURL = 'http://localhost:3000/netflix'
+  private appURL = 'http://localhost:3000/data'
 
   constructor(private http: HttpClient) { }
 
@@ -21,18 +21,10 @@ export class NetflixService {
   }
 
   getMovies(): Observable<Netflix[]> {
-    return this.http.get<Netflix[]>(this.appURL).pipe(catchError(this.handleError))
+    return this.http.get<Netflix[]>(this.appURL)
   }
 
-  private handleError(error: HttpErrorResponse): Observable<never> {
-    if(error.error instanceof ErrorEvent) {
-      console.error('An error occurred: ', error.error.message)
-    } else {
-      console.error(
-        `Status code ${error.status} ` + 
-        `body was: ${error.error}` 
-      )
-    }
-    return throwError(()=> 'Something went wrong 😔😔, please try again later.')
+  addToBookmark(addItem: Netflix): Observable<Netflix[]> {
+    return this.http.put<Netflix[]>(`${this.appURL}/${addItem.id}`, addItem)      
   }
 }
