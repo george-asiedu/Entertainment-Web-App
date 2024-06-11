@@ -6,11 +6,11 @@
         <div class="w-full">
             <div class="w-full mx-auto flex items-center gap-[1rem] px-[1rem] py-[10px] lg:py-0 md:p-[1.5rem]">
                 <img src="../../../assets/icon-search.svg" alt="icon-search">
-                <input 
+                <input
                     type="text"
                     [(ngModel)]="search"
-                    (keyup)="searchlist()"
-                    placeholder="Serach for movies or Tv series"
+                    (keyup)="searchList()"
+                    placeholder="Search for movies or Tv series"
                     class="w-[90%] bg-midnight py-[8px] caret-plum focus:text-white focus:outline-none focus:border-b-2 focus:border-b-slate"
                 >
             </div>
@@ -20,49 +20,16 @@
             @if (search === '') {
                 <h1 class="text-white text-lg font-light tracking-wide mb-[10px] lg:mb-[14px]">Trending</h1>
                 <app-trending></app-trending>
-            } @else {
-                <h1 class="hidden">Trending</h1>
-            }        
+            } @else {}
         </div>
 
         <div class="px-[1rem] md:px-[1.5rem] mt-[20px]">
             @if (search === '') {
                 <h1 class="text-white text-lg font-light tracking-wide mb-[14px]">Recommended for you</h1>
-            } @else {
-                <h1 class="text-white text-lg font-light tracking-wide mb-[14px]">Found {{ searchResultCount}} results for `{{ search }}`</h1>
-            }
+            } @else {}
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[1rem]">
-                <div *ngFor="let list of movieItems" class="flex flex-col gap-[2px] mb-[15px] cursor-pointer">
-                    <div class="relative">
-                        <img [src]="list.thumbnail.regular.large" class="rounded-[8px]" alt="list.title">
-                        <div class="absolute top-[8%] right-[8%] lg:right-[5%] bg-midnight bg-opacity-50 w-[20px] h-[20px] md:w-[25px] md:h-[25px] rounded-full flex items-center justify-center">
-                            <img src="../../../assets/icon-bookmark-empty.svg" class="w-[40%]" alt="icon-bookmark-empty">
-                        </div>
-                        <div class="absolute inset-0 flex items-center gap-[12px] justify-center bg-slate bg-opacity-15 opacity-0 hover:opacity-100 transition-opacity ease-out duration-700 transition-delay-100">
-                            <div class="w-[85px] flex items-center gap-[12px] justify-center bg-white bg-opacity-20 rounded-[25px] py-[6px]">
-                                <img src="../../../assets/icon-play.svg" class="w-[25px]" alt="Play icon">
-                                <h5 class="text-white text-xs">Play</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-[8px] text-white text-opacity-60 text-xs">
-                        <p>{{ list.year }}</p>
-                        <div class="flex items-center gap-1">
-                            <p class="-mt-[13px] text-lg">.</p>
-                            @if (list.category === 'Movie') {
-                                <img src="../../../assets/icon-category-movie.svg" alt="icon-category-movie">
-                            } @else {
-                                <img src="../../../assets/icon-category-tv.svg" alt="icon-category-tv">
-                            }
-                            <p>{{ list.category }}</p>
-                        </div>
-                        <p class="-mt-[13px] text-lg">.</p>
-                        <p>{{ list.rating }}</p>
-                    </div>
-                    <h3 class="text-white leading-none">{{ list.title }}</h3>
-                </div>
+                <app-movie-list *ngFor="let movie of movieItems" [movieList]="movie" />
             </div>
         </div>
     </div>
-    
 </div>

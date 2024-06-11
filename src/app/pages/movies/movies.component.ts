@@ -3,12 +3,13 @@ import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 import { Netflix } from '../../model/netflix';
 import { NetflixService } from '../../service/netflix.service';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { NgFor } from '@angular/common';
+import { MovieListComponent } from '../../components/movie-list/movie-list.component';
 
 @Component({
   selector: 'app-movies',
   standalone: true,
-  imports: [SidebarComponent, FormsModule],
+  imports: [SidebarComponent, FormsModule, NgFor, MovieListComponent],
   templateUrl: './movies.component.html',
   styleUrl: './movies.component.scss'
 })
@@ -22,12 +23,12 @@ export class MoviesComponent implements OnInit{
   ngOnInit(): void {
       this.ns.getMovies().subscribe(
         (movie) => {
-          this.movies = movie.filter(mov => mov.category === 'Movie')
+          this.movies = movie.filter(mov => mov.category.includes('Movie'))
         }
       )
   }
 
-  searchlist(): void {
+  searchList(): void {
     if(this.search === '') {
       this.ngOnInit()
     } else {

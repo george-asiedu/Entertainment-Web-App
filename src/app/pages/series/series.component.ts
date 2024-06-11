@@ -3,11 +3,13 @@ import { Netflix } from '../../model/netflix';
 import { NetflixService } from '../../service/netflix.service';
 import { FormsModule } from '@angular/forms';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
+import { MovieListComponent } from '../../components/movie-list/movie-list.component';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-series',
   standalone: true,
-  imports: [FormsModule, SidebarComponent],
+  imports: [FormsModule, SidebarComponent, MovieListComponent, NgFor],
   templateUrl: './series.component.html',
   styleUrl: './series.component.scss'
 })
@@ -21,12 +23,12 @@ export class SeriesComponent implements OnInit {
   ngOnInit(): void {
       this.ns.getMovies().subscribe(
         (movie) => {
-          this.series = movie.filter(mov => mov.category === 'TV Series')
+          this.series = movie.filter(mov => mov.category.includes('TV Series'))
         }
       )
   }
 
-  searchlist(): void {
+  searchList(): void {
     if(this.search === '') {
       this.ngOnInit()
     } else {
